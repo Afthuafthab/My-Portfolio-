@@ -105,14 +105,8 @@ window.addEventListener('load', () => {
     document.body.classList.add('loaded');
 });
 
-// Parallax effect for hero section
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    if (hero) {
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-    }
-});
+// Parallax effect removed for hero section to prevent scrolling issues
+// The previous parallax effect was causing the hero section to move with scroll
 
 // Typing effect for hero subtitle
 function typeWriter(element, text, speed = 100) {
