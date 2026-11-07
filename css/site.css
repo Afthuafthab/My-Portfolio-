@@ -393,3 +393,89 @@ html:not(.js) .shot:not(:first-child) { display: none; }
   .mock .device-b { transform: none; }
   .lineup li.is-in { animation: none; }
 }
+
+/* =====================================================================
+   Premium layer: gold gradients, glows, portrait frame (user request)
+   ===================================================================== */
+:root {
+  --gold-grad: linear-gradient(135deg, #f6e3ad 0%, #d8b46a 38%, #b88a3e 70%, #8c6428 100%);
+  --gold-text: linear-gradient(180deg, #fbecc4 0%, #d9b56b 55%, #a97c34 100%);
+  --ink-grad: linear-gradient(180deg, #ffffff 30%, #efdcb4 100%);
+}
+
+/* Buttons and active filter: brushed gold */
+.btn, .chip.is-on { background: var(--gold-grad); background-size: 140% 140%; background-position: 0% 50%; transition: background-position 500ms var(--ease-out), transform var(--t-hover) var(--ease-out); }
+.btn:hover, .chip.is-on:hover { background: var(--gold-grad); background-size: 140% 140%; background-position: 100% 50%; }
+
+/* Gold text for the big numbers, place links and the email */
+.hero-facts dt, .places a, .plate-meta {
+  background: var(--gold-text); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.places a:hover { background: none; color: var(--ink); -webkit-text-fill-color: currentColor; }
+
+/* The name: white melting into champagne */
+.hero-title span[aria-hidden], .h-head, .plate-text h3 {
+  background: var(--ink-grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* Warm light behind the hero phone and inside every section */
+.hero { background-image: radial-gradient(55% 45% at 50% 62%, rgba(214, 176, 101, 0.16), transparent 72%); }
+.plate { background-image: radial-gradient(70% 80% at 75% 50%, rgba(214, 176, 101, 0.10), transparent 70%); }
+.plate:nth-of-type(even) { background-image: radial-gradient(70% 80% at 25% 50%, rgba(214, 176, 101, 0.10), transparent 70%); }
+.plate-pic, .fun-stage { background: linear-gradient(150deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.015) 60%, rgba(214, 176, 101, 0.06) 100%); border-radius: 18px; }
+.everything { background: linear-gradient(180deg, #181512 0%, #120f0c 100%); }
+.about { background: radial-gradient(60% 50% at 20% 30%, rgba(214, 176, 101, 0.10), transparent 70%), linear-gradient(180deg, #181512 0%, #0f0d0a 100%); }
+
+/* Contact: deep gold dusk instead of flat grey */
+.contact {
+  background: radial-gradient(90% 110% at 0% 0%, #4a3818 0%, #1f170d 45%, #0c0a08 100%);
+  color: var(--ink);
+}
+.mail span { background: var(--gold-text); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.mail:hover span, .mail:focus-visible span { background: var(--ink-grad); -webkit-background-clip: text; background-clip: text; }
+.socials a:hover, .contact-foot a:hover { color: var(--accent); }
+.foot-name { background: linear-gradient(180deg, #2c2419 0%, rgba(44, 36, 25, 0) 95%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* ---------- Portrait: arched frame with a gold edge, glow and two floating badges ---------- */
+.about-pic { position: sticky; }
+.portrait {
+  position: relative; padding: 3px;
+  border-radius: 999px 999px 28px 28px;
+  background: var(--gold-grad);
+  box-shadow: 0 50px 90px -40px rgba(214, 176, 101, 0.45);
+}
+.portrait::before {
+  content: ""; position: absolute; inset: 10% -8% -6% -8%; z-index: -1;
+  background: radial-gradient(closest-side, rgba(214, 176, 101, 0.35), transparent);
+  filter: blur(30px);
+}
+.portrait img {
+  width: 100%; aspect-ratio: 2 / 3; object-fit: cover; object-position: 50% 30%;
+  border-radius: 999px 999px 25px 25px;
+  filter: contrast(1.04) saturate(1.05);
+  transition: transform 900ms var(--ease-out);
+}
+.about-pic:hover .portrait img { transform: scale(1.015); }
+.badges { margin: 0; }
+.badge {
+  position: absolute; display: flex; flex-direction: column; gap: 2px;
+  padding: 12px 18px; border-radius: 14px;
+  background: linear-gradient(#15110d, #15110d) padding-box, var(--gold-grad) border-box;
+  border: 1px solid transparent;
+  box-shadow: 0 20px 40px -18px rgba(0, 0, 0, 0.8);
+  font-size: var(--step-small); line-height: 1.35; color: var(--ink);
+  animation: float 6s ease-in-out infinite;
+}
+.badge strong { font-weight: 600; background: var(--gold-text); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.badge-now { left: -4%; bottom: 9%; }
+.badge-also { right: -5%; top: 22%; animation-delay: -3s; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+@media (max-width: 720px) {
+  .about-pic { position: relative; width: 86%; margin: 0 auto; }
+  .badge-now { left: -4%; }
+  .badge-also { right: -4%; }
+  .plate-pic, .fun-stage { border-radius: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { .badge { animation: none; } }
+@media (max-width: 720px) { .about-pic { top: auto; } .about-text { margin-top: 80px; } }
