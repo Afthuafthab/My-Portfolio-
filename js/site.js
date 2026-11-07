@@ -9,7 +9,9 @@
   let current = 0;
   const show = (i) => {
     if (i === current || !shots[i]) return;
+    shots.forEach((sh) => sh.classList.remove('was-on'));
     shots[current].classList.remove('is-on');
+    shots[current].classList.add('was-on');
     shots[i].classList.add('is-on');
     current = i;
     hero.style.setProperty('--ground', shots[i].dataset.ground);
