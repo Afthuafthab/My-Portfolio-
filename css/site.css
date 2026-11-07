@@ -92,22 +92,20 @@ ul { padding: 0; list-style: none; }
 .hero { position: relative; height: 250svh; background: var(--ground, #1a0f0e); transition: background-color 600ms ease; }
 .hero-stage {
   position: sticky; top: 0; height: 100svh; overflow: hidden;
-  display: grid; grid-template-columns: 1fr; grid-template-rows: 1fr;
+  display: grid; grid-template-rows: auto minmax(0, 1fr); gap: 16px;
+  padding-top: var(--bar);
 }
 .hero-title {
-  grid-area: 1 / 1; z-index: 3; align-self: start;
-  margin-top: var(--bar);
   text-align: center;
-  font: 400 min(27vw, 44svh)/1 var(--display);
+  font: 400 min(20vw, 26svh)/0.9 var(--display);
   letter-spacing: -0.01em; text-transform: uppercase;
   color: var(--ink);
+  padding-top: 8px;
 }
 .hero-frame {
-  grid-area: 1 / 1; z-index: 2; justify-self: center; align-self: end;
+  justify-self: center;
   position: relative;
-  height: calc(100svh - var(--bar) - min(13vw, 20svh));
-  aspect-ratio: 2 / 3;
-  max-width: calc(100vw - 2 * var(--margin));
+  height: 100%; aspect-ratio: 2 / 3;
   background: var(--surface);
   overflow: hidden;
 }
@@ -117,7 +115,7 @@ ul { padding: 0; list-style: none; }
 html:not(.js) .shot:not(:first-child) { display: none; }
 
 .hero-foot {
-  grid-area: 1 / 1; z-index: 3; align-self: end;
+  position: absolute; left: 0; right: 0; bottom: 0;
   display: flex; justify-content: space-between; align-items: flex-end; gap: var(--gutter);
   padding: 0 var(--margin) 32px;
   pointer-events: none;
@@ -231,6 +229,7 @@ html:not(.js) .shot:not(:first-child) { display: none; }
 .about-text .statement { margin: 32px 0 24px; }
 .about-text > p:not(.statement) { max-width: 62ch; }
 .about-text > p + p { margin-top: 20px; }
+.cv-link { margin-top: 32px; }
 .cv li {
   display: grid; grid-template-columns: 1.1fr 1.3fr auto; gap: 0 var(--gutter);
   padding: 12px 0; font-size: var(--step-body);
@@ -299,6 +298,17 @@ html:not(.js) .shot:not(:first-child) { display: none; }
   .lineup .l-stack { display: none; }
 }
 
+/* ---------- Portrait screens (phones, tablets): name, then picture, then words. Nothing overlaps. ---------- */
+@media (max-width: 1100px), (orientation: portrait) {
+  .hero-stage { grid-template-rows: auto minmax(0, 1fr) auto; padding-bottom: 20px; }
+  .hero-title { font-size: min(30vw, 22svh); }
+  .hero-frame { width: calc(100% - 2 * var(--margin)); height: 100%; aspect-ratio: auto; }
+  .hero-foot { position: static; flex-direction: column; align-items: stretch; gap: 14px; padding-bottom: 0; }
+  .hero-lead { max-width: 60ch; }
+  .hero-act { flex-direction: row; justify-content: space-between; align-items: center; }
+  .hero-cap { text-align: left; }
+}
+
 /* ---------- Phone: its own composition ---------- */
 @media (max-width: 720px) {
   :root { --bar: 56px; }
@@ -307,19 +317,7 @@ html:not(.js) .shot:not(:first-child) { display: none; }
   .wm-short { display: inline; }
 
   .hero { height: 230svh; }
-  .hero-title { font-size: 30vw; margin-top: var(--bar); }
-  .hero-frame {
-    align-self: start;
-    margin-top: calc(var(--bar) + 15vw);
-    width: calc(100vw - 2 * var(--margin));
-    height: auto; aspect-ratio: 2 / 3;
-    max-height: calc(100svh - var(--bar) - 15vw - 170px);
-    max-width: none;
-  }
-  .hero-foot { flex-direction: column; align-items: stretch; gap: 14px; padding-bottom: 20px; }
-  .hero-lead { max-width: none; }
-  .hero-act { flex-direction: row; justify-content: space-between; align-items: center; }
-  .hero-cap { text-align: left; }
+
 
   .intro { display: block; }
   .intro-text { position: static; }
