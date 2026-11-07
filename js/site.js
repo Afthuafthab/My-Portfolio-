@@ -40,7 +40,7 @@
         const r = pl.getBoundingClientRect();
         if (r.bottom < 0 || r.top > vh) continue;
         const p = (vh - r.top) / (vh + r.height); // 0..1 across the plate's pass
-        const m = pl.querySelector('.plate-pic img, .plate-pic video'); if (m) m.style.setProperty('--drift', `${(0.5 - p) * 30}px`);
+        const m = pl.querySelector('.mock .device-b'); if (m) m.style.setProperty('--drift', `${(0.5 - p) * 30}px`);
       }
     }
   };
