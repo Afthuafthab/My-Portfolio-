@@ -89,7 +89,7 @@ ul { padding: 0; list-style: none; }
 .wm-short { display: none; }
 
 /* ---------- Hero: pinned name, frames swap beneath ---------- */
-.hero { position: relative; height: 250svh; background: var(--ground, #1a0f0e); transition: background-color 600ms ease; }
+.hero { position: relative; height: 200svh; background: var(--ground, #1a0f0e); transition: background-color 600ms ease; }
 .hero-stage {
   position: sticky; top: 0; height: 100svh; overflow: hidden;
   display: grid; grid-template-rows: auto minmax(0, 1fr); gap: 16px;
@@ -115,27 +115,18 @@ html:not(.js) .shot:not(:first-child) { display: none; }
   padding: 0 var(--margin) 32px;
   pointer-events: none;
 }
-.hero-lead { max-width: 26ch; font-weight: 600; pointer-events: auto; }
+.hero-intro { max-width: 30ch; pointer-events: auto; }
+.hero-role { font-size: var(--step-lead); line-height: 1.25; font-weight: 600; }
+.hero-lead { margin-top: 12px; }
+.hero-facts { display: flex; gap: 28px; margin-top: 22px; }
+.hero-facts dt { font: 400 var(--step-lead)/1 var(--display); color: var(--accent); }
+.hero-facts dd { margin-top: 4px; font-size: var(--step-small); max-width: 11ch; line-height: 1.3; }
 .hero-act { display: flex; flex-direction: column; align-items: flex-end; gap: 14px; pointer-events: auto; }
 .hero-cap { font-size: var(--step-small); color: var(--ink); text-align: right; max-width: 24ch; }
 
-/* ---------- Intro ---------- */
-.intro {
-  display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gutter);
-  padding: var(--section) var(--margin);
-}
-.intro-text { grid-column: 1 / span 6; align-self: start; position: sticky; top: calc(var(--bar) + 48px); }
-.intro-text .statement { margin-top: 32px; }
-.facts { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 40px; margin-top: 56px; }
-.facts dt { font: 400 var(--step-head)/0.9 var(--display); color: var(--accent); }
-.facts dd { margin-top: 10px; font-size: var(--step-small); max-width: 16ch; }
-.intro-pics { grid-column: 8 / span 5; display: grid; gap: 15svh; padding-top: 12svh; }
-.ip-a { width: 46%; }
-.ip-b { width: 100%; }
-.ip-c { width: 72%; justify-self: end; }
 
 /* ---------- Work plates ---------- */
-.work { padding-top: 0; }
+.work { padding-top: var(--section); }
 .work-title { padding: 0 var(--margin) 64px; }
 .plate {
   display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gutter); align-items: center;
@@ -316,8 +307,6 @@ html:not(.js) .shot:not(:first-child) { display: none; }
 
 /* ---------- Tablet ---------- */
 @media (max-width: 1024px) {
-  .intro-text { grid-column: 1 / span 7; }
-  .intro-pics { grid-column: 9 / span 4; }
   .fun-intro { grid-column: 1 / -1; margin-bottom: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); align-items: end; }
   .fun-intro p { margin-top: 0; }
   .fun-big { grid-column: 1 / -1; }
@@ -335,7 +324,7 @@ html:not(.js) .shot:not(:first-child) { display: none; }
   .hero-title { font-size: min(30vw, 22svh); }
   .hero-frame { height: 100%; }
   .hero-foot { position: static; flex-direction: column; align-items: stretch; gap: 14px; padding-bottom: 0; }
-  .hero-lead { max-width: 60ch; }
+  .hero-intro { max-width: 60ch; }
   .hero-act { flex-direction: row; justify-content: space-between; align-items: center; }
   .hero-cap { text-align: left; }
 }
@@ -347,17 +336,14 @@ html:not(.js) .shot:not(:first-child) { display: none; }
   .wm-long { display: none; }
   .wm-short { display: inline; }
 
-  .hero { height: 230svh; }
+  .hero { height: auto; }
+  .hero-stage { position: static; height: auto; display: flex; flex-direction: column; gap: 22px; padding-bottom: 48px; }
+  .hero-title { order: 1; font-size: 30vw; }
+  .hero-foot { order: 2; }
+  .hero-frame { order: 3; height: auto; width: 68%; align-self: center; }
+  .hero-facts { justify-content: space-between; gap: 12px; }
 
 
-  .intro { display: block; }
-  .intro-text { position: static; }
-  .facts { grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .facts dd { max-width: none; }
-  .intro-pics { display: block; padding-top: 56px; }
-  .ip-a { width: 52%; }
-  .ip-b { margin-top: 48px; }
-  .ip-c { width: 80%; margin: 40px 0 0 auto; }
   .plate-pic { padding: 24px 16px; }
   .mock .device-b { width: 25%; }
   .browser-bar { height: 26px; padding: 0 10px; gap: 5px; }

@@ -16,6 +16,9 @@
     if (cap) cap.textContent = shots[i].dataset.cap;
   };
   if (hero) hero.style.setProperty('--ground', shots[0].dataset.ground);
+  /* On phones the hero is not pinned: the screens swap on their own instead */
+  const phone = matchMedia('(max-width: 720px)');
+  if (hero && !reduce) setInterval(() => { if (phone.matches && !document.hidden) show((current + 1) % shots.length); }, 2600);
 
   /* Work plates: slow drift of each picture while its plate is on screen */
   const plates = [...document.querySelectorAll('.plate')];
@@ -30,10 +33,10 @@
     if (pending.length) pending = pending.filter((el) => { if (el.getBoundingClientRect().top < vh) { el.classList.add('is-in'); return false; } return true; });
     if (hero) {
       const r = hero.getBoundingClientRect();
-      if (bar) bar.classList.toggle('is-clear', r.bottom > vh + 1);
+      if (bar) bar.classList.toggle('is-clear', phone.matches ? r.top > -10 : r.bottom > vh + 1);
       const run = r.height - vh;
       const p = Math.min(1, Math.max(0, -r.top / run));
-      show(Math.min(shots.length - 1, Math.floor(p * shots.length * 0.999)));
+      if (!phone.matches) show(Math.min(shots.length - 1, Math.floor(p * shots.length * 0.999)));
     }
     if (!reduce) {
       for (const pl of plates) {
